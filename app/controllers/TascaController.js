@@ -44,7 +44,6 @@ class TascaController {
     this.tasques.tasques.forEach(element => {
       console.log(element);
     });
-    console.log();
   }
 
 }
