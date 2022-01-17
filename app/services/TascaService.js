@@ -1,7 +1,7 @@
 const { Tasca } = require('../models/Tasca');
 const fs = require('fs');
 
-class TascaController {
+class TascaService {
 
   constructor() {
     this.ruta = 'database/tasques_db.json';
@@ -48,4 +48,4 @@ class TascaController {
 
 }
 
-module.exports = { TascaController };
+module.exports = { TascaService };

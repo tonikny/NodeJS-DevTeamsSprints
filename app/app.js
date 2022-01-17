@@ -1,5 +1,5 @@
-const { TascaController } = require('./controllers/TascaController');
+const { TascaService } = require('./services/TascaService');
 
-const tc = new TascaController();
+const ts = new TascaService();
 //console.log(tc.tasques);
-tc.llistarTasques();
+ts.llistarTasques();
