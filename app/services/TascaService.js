@@ -1,27 +1,16 @@
-const { Tasca } = require('../models/Tasca');
+const { Tasca } = require('../models/TascaJson');
 const fs = require('fs');
 
 class TascaService {
 
   constructor() {
-    this.ruta = 'database/tasques_db.json';
-    this.tasques = { tasques: [] };
-    try {
-      const file_data = fs.readFileSync(this.ruta, 'utf8');
-      this.tasques = JSON.parse(file_data);
-    } catch (err) {
-      if (err.code === 'ENOENT') {
-        fs.writeFileSync(this.ruta, JSON.stringify(this.tasques), 'utf-8');
-      } else {
-        throw err;
-      }
-    }
-
+    const tasca = new Tasca();
+    this.tasques = tasca.llistar();
   }
 
-  afegirTasca() {
-    let tasca = new Tasca();
-    console.log('Tasca creada:', tasca);
+  afegirTasca(dades) {
+    const tasca = new Tasca(dades);
+    return tasca.afegir();
   }
 
   veureTasca() {
@@ -36,14 +25,14 @@ class TascaService {
 
   }
 
-  esborrarTasca() {
-
+  async esborrarTasca(id) {
+    const tasca = new Tasca();
+    return await tasca.esborrar(id);
   }
 
-  llistarTasques() {
-    this.tasques.tasques.forEach(element => {
-      console.log(element);
-    });
+  async llistarTasques() {
+    const tasca = new Tasca();
+    return await tasca.llistar();
   }
 
 }

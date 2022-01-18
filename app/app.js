@@ -1,5 +1,17 @@
 const { TascaService } = require('./services/TascaService');
 
-const ts = new TascaService();
-//console.log(tc.tasques);
-ts.llistarTasques();
+
+(async function () {
+  const ts = new TascaService();
+  let sortida = await ts.llistarTasques();
+  console.log('[APP1]', sortida);
+  const novaTasca = {nom:'tasca nova'}
+  await ts.afegirTasca(novaTasca)
+  sortida = await ts.llistarTasques();
+  console.log('[APP2]', sortida);
+  await ts.esborrarTasca(3);
+  sortida = await ts.llistarTasques();
+  console.log('[APP3]', sortida);
+})();
+
+

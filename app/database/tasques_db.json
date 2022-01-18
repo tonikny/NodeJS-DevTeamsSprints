@@ -1,1 +1,1 @@
-{"tasques":[{"nom":"uno"}]}
+{"tasques":[{"id":1,"nom":"tasca_1","estat":"activa"},{"id":2,"nom":"tasca_2"},{"id":3,"nom":"nova"},{"id":4,"nom":"mesnova"}]}
