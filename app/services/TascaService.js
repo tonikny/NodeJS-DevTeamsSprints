@@ -21,8 +21,9 @@ class TascaService {
 
   }
 
-  actualitzarTasca() {
-
+  async actualitzarTasca(dades) {
+    const tasca = new Tasca();
+    return await tasca.actualitzar(dades);
   }
 
   async esborrarTasca(id) {

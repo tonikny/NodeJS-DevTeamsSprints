@@ -5,19 +5,7 @@ class Tasca {
   ruta = 'database/tasques_db.json';
 
   constructor(dades) {
-    /* this.nom = nom;
-    this.descripcio = descripcio;
-    this.hora_inici = hora_inici;
-    this.hora_final = hora_final;
-    this.estat = estat;
-    this.usuari = usuari; */
-
-    /* for (const d in dades) {
-      this[d] = dades[d];
-    } */
-
     Object.assign(this, dades);
-
   }
 
   async _llegirArxiu() {
@@ -30,12 +18,13 @@ class Tasca {
     }
   }
 
-  async _escriureArxiu (tasques) {
+  async _escriureArxiu(tasques) {
     try {
-      await fs.writeFile(this.ruta, JSON.stringify({tasques:tasques}), 'utf-8');
+      await fs.writeFile(this.ruta, JSON.stringify({ tasques: tasques }), 'utf-8');
     } catch (e) {
       throw e;
-    }  }
+    }
+  }
 
   async llistar() {
     const tasques = await this._llegirArxiu();
@@ -45,7 +34,7 @@ class Tasca {
   async afegir() {
     try {
       const tasques = await this._llegirArxiu();
-      const id = (tasques.length === 0) ? 1 : Math.max.apply(Math, tasques.map(function (o) { return o.id; }))+1;
+      const id = (tasques.length === 0) ? 1 : Math.max.apply(Math, tasques.map(function (o) { return o.id; })) + 1;
       tasques.push({
         id: id,
         nom: this.nom,
@@ -65,7 +54,7 @@ class Tasca {
   async esborrar(id) {
     try {
       const tasquesAbans = await this._llegirArxiu();
-      const tasquesDespres = tasquesAbans.filter(o => o.id!==id);
+      const tasquesDespres = tasquesAbans.filter(o => o.id !== id);
       await this._escriureArxiu(tasquesDespres);
       return true;
     } catch (e) {
@@ -75,10 +64,22 @@ class Tasca {
 
   async obtenir(id) {
     const tasques = await this._llegirArxiu();
-    const tasca = tasques.find( o => o.id === id );
+    const tasca = tasques.find(o => o.id === id);
     return tasca;
   }
 
+  async actualitzar(dades) {
+    const tasquesAbans = await this._llegirArxiu();
+    const tasquesDespres = tasquesAbans.map(o => {
+      if (o.id === dades.id) {
+        Object.assign(o, dades);
+      }
+      return o;
+    });
+    await this._escriureArxiu(tasquesDespres);
+    return true;
+  }
+  
 }
 
 
