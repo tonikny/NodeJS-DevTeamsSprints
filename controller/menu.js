@@ -1,17 +1,77 @@
+const inquirer  = require('inquirer');
 
-const username = [
+
+
+// el programaça aqui
+const controller = async (service) =>{ 
+    const user = await mostraMenu(usernamePreguntes);
+    let sortir = false;
+
+do{
+    const menu = await mostraMenu(menuPreguntes);
+    await   selected(service,user.name,menu.opcio);
+    if (menu.opcio == 6 ){
+            sortir = true;
+    }
+    }while(!sortir);
+}
+
+const mostraMenu = async (question) => {
+
+    const answer = await   inquirer .prompt(question)
+    return answer;
+}
+
+const selected = async (service,username,opcio) => {
+    let  sortir = false
+    let answer = []; 
+    switch(opcio){
+
+        case 1: 
+            answer = await mostraMenu(novaTasca);
+            // servei.crear(username,answer.nom,answer.descripcio,answer.estat);
+            console.log("crear tasca");
+            console.log(answer);
+            break;
+
+        case 2: 
+            answer = await mostraMenu(idTasca);
+            console.log(answer);
+            break;
+        case 3:
+            answer = await mostraMenu(idTasca);
+            // servei.esborrar(answer.id);
+            console.log(answer);
+            break;
+        case 4:
+            console.log("llistar");
+            break;
+        case 5:
+            answer = await mostraMenu(idTasca);
+            // servei.mostrarTasca(answer.id);
+            console.log(answer);
+            break;
+
+        case 6:
+            // const llista = service.llistar();
+            console.log("sortir");
+            sortir = true;
+            break;
+    }
+}
+const usernamePreguntes = [
     {
         type: "input",
-        name: "username",
+        name: "name",
         message: "el teu nom?"
     }
 
 
 ]
 
-const menuPrueguntes = [
+const menuPreguntes = [
     {
-        type: "input",
+        type: "number",
         name: "opcio",
         message: "Menu:\n1.Afegir\n2.Editar\n3.Esborrar\n4.Llistar\n5.Veure tasca\n6.Sortir\n"
     }
@@ -21,15 +81,13 @@ const menuPrueguntes = [
 
 const idTasca = [
     {
-        type: "input",
+        type: "number",
         name: "idTasca",
         message: "id de la tasca?"
     }
-
-
 ]
 
-const newTask = [
+const novaTasca = [
     {
         type: "input",
         name: "nom",
@@ -47,99 +105,4 @@ const newTask = [
         choices: ["pendent", "començat","finalitzat"]
     }
 ]
-const controller = (service) =>{ 
-
-    inquirer
-        .prompt(username)
-        .then((answers) => {
-            menu(service,username);
-        })
-        .catch((error) => {
-            if (error.isTtyError) {
-                console.log("No funciona per consola")
-            } else {
-                console.log(error)
-            }
-        })
-
-
-
-}
-const menu = (service,username) => {
-
-    inquirer
-        .prompt(menuPrueguntes)
-        .then((answers) => {
-            selected(service,username,answers.opcio) 
-        })
-
-        .catch((error) => {
-            if (error.isTtyError) {
-                console.log("Your console environment is not supported!")
-
-            } else {
-                console.log(error)
-            }
-        })
-
-}
-
-const selected = (service,username,opcio) => {
-
-
-    switch(opcio){
-
-        case 1: 
-
-            inquirer
-                .prompt(newTask)
-                .then((answers) => {
-                    service.afegir(username,answers.nom,answers.descripcio,answers.estat);
-                });
-
-            break;
-
-        case 2: 
-
-            inquirer
-                .prompt(idTasca)
-                .then((answer) => {
-                    service.editar(answer);
-                });
-            break;
-        case 3:
-
-            inquirer
-                .prompt(idTasca)
-                .then((answer) => {
-                    service.esborrar(answer.idTasca);
-                });
-
-            break;
-        case 4:
-
-            inquirer
-                .prompt(idTasca)
-                .then((answer) => {
-                    service.veureTasca(answer.idTasca);
-                });
-
-
-            break;
-        case 5: service.llistar();
-            break;
-
-    }
-    if( answer.opcio != 6){
-
-        menu();
-    }
-
-
-
-}
-
-
-
-
-
+controller();
