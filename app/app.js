@@ -1,21 +1,9 @@
-const app = require('../controller/menu.js');
 
-const Service = require('../service/task.js');
+const app = require('./controller/menu.js');
+const { TascaService } = require('./services/TascaService');
 
+database = 'JSON';
+const tascaService = new TascaService(database);
 
-// en el seguents nivells asignarem a database depenent el que volguem utilitzar si JSON, Mysql, Mongo
-//
-// ara asigno directament el json
+app.start(tascaService);
 
-database = require('../model/json.js');
-
-
-
-
-
-
-const service = new Service(database);
-
-
-
-app.start(service);
