@@ -105,3 +105,4 @@ const novaTasca = [
         choices: ["pendent", "començat","finalitzat"]
     }
 ]
+module.exports = {start}

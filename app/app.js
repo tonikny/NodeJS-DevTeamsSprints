@@ -1,9 +1,9 @@
 
 const app = require('./controller/menu.js');
 const { TascaService } = require('./services/TascaService');
-const  TascaJson  = require('./model/TascaJson');
+const  { Tasca }  = require('./models/TascaJson');
 
-const database = new TascaJson();
+const database = new Tasca();
 const tascaService = new TascaService(database);
 
 app.start(tascaService);
