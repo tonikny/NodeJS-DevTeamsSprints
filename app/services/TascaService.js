@@ -3,8 +3,9 @@ const fs = require('fs');
 
 class TascaService {
 
-  constructor() {
+  constructor(database) {
     const tasca = new Tasca();
+    this.database = database;
   }
 
   afegirTasca(dades) {
@@ -12,12 +13,15 @@ class TascaService {
     return tasca.afegir();
   }
 
-  veureTasca() {
-
+  veureTasca(id) {
+    //const tasca = new Tasca();
+    const tascaTrobada = this.cercarTasca(id);
+    console.log(`La tasca es ${ tascaTrobada }`);
   }
 
-  cercarTasca() {
-
+  cercarTasca(id) {
+    const tasca = new Tasca();
+    return tasca.obtenir(id);
   }
 
   async actualitzarTasca(dades) {
@@ -32,10 +36,13 @@ class TascaService {
 
   async llistarTasques() {
     const tasca = new Tasca();
+    return await tasca.database.llistar();
     return await tasca.llistar();
   }
 
 }
+
+
 
 module.exports = { TascaService };
 
