@@ -3,7 +3,7 @@ const inquirer  = require('inquirer');
 
 
 // el programaça aqui
-const controller = async (service) =>{ 
+const start = async (service) =>{ 
     const user = await mostraMenu(usernamePreguntes);
     let sortir = false;
 
@@ -105,4 +105,3 @@ const novaTasca = [
         choices: ["pendent", "començat","finalitzat"]
     }
 ]
-controller();
