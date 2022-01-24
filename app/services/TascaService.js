@@ -43,14 +43,10 @@ class TascaService {
   async llistarTasques() {
     console.log('llistartasques')
     const tasca = new Tasca();
-    console.log(tasca)
-    const tasques = tasca.llistar();
+    const tasques = await tasca.llistar();
     for (let i = 0; i < tasques.length; i ++) {
-      console.log(`tasca : ${ tasques[i]}`)
+      console.log(`tasca : ${JSON.stringify(tasques[i])}`)
     }
-    //tasca.llistar();
-    return await tasca.database.llistar();
-    return await tasca.llistar();
   }
 
 }

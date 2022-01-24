@@ -43,7 +43,7 @@ const selected = async (service,username,opcio) => {
             break;
         case 4:
             console.log("llistar");
-            service.llistarTasques();
+            await service.llistarTasques();
             break;
         case 5:
             answer = await mostraMenu(idTasca);
