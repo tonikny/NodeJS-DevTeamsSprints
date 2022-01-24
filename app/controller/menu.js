@@ -1,9 +1,7 @@
 const inquirer  = require('inquirer');
 
-
-
 // el programaça aqui
-const controller = async (service) =>{ 
+const start = async (service) =>{ 
     const user = await mostraMenu(usernamePreguntes);
     let sortir = false;
 
@@ -40,7 +38,7 @@ const selected = async (service,username,opcio) => {
             break;
         case 3:
             answer = await mostraMenu(idTasca);
-            // servei.esborrar(answer.id);
+            service.esborrar(answer.id);
             console.log(answer);
             break;
         case 4:
@@ -48,7 +46,7 @@ const selected = async (service,username,opcio) => {
             break;
         case 5:
             answer = await mostraMenu(idTasca);
-            // servei.mostrarTasca(answer.id);
+            service.mostrarTasca(answer.id);
             console.log(answer);
             break;
 
@@ -105,4 +103,4 @@ const novaTasca = [
         choices: ["pendent", "començat","finalitzat"]
     }
 ]
-controller();
+module.exports = {start}
