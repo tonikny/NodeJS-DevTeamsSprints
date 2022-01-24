@@ -16,14 +16,17 @@ class TascaService {
 
   veureTasca(id) {
     const tasca = new Tasca();
+  
+    console.log(`La tasca ID ${ id }`)
     const tascaTrobada = this.cercarTasca(id);
     console.log(`La tasca es ${ tascaTrobada }`);
+    
   }
 
   cercarTasca(id) {
     const tasca = new Tasca();
     console.log(`cercar tasca${tasca.obtenir(id)}`)
-    //return tasca.obtenir(id);
+    return tasca.obtenir(id);
 
   }
 
@@ -40,6 +43,7 @@ class TascaService {
   async llistarTasques() {
     console.log('llistartasques')
     const tasca = new Tasca();
+    console.log(tasca)
     const tasques = tasca.llistar();
     for (let i = 0; i < tasques.length; i ++) {
       console.log(`tasca : ${ tasques[i]}`)

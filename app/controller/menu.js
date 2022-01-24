@@ -27,7 +27,7 @@ const selected = async (service,username,opcio) => {
 
         case 1: 
             answer = await mostraMenu(novaTasca);
-            // servei.crear(username,answer.nom,answer.descripcio,answer.estat);
+            service.afegirTasca(username,answer.nom,answer.descripcio,answer.estat);
             console.log("crear tasca");
             console.log(answer);
             break;
@@ -38,15 +38,17 @@ const selected = async (service,username,opcio) => {
             break;
         case 3:
             answer = await mostraMenu(idTasca);
-            service.esborrar(answer.id);
+            service.esborrarTasca(answer.id);
             console.log(answer);
             break;
         case 4:
             console.log("llistar");
+            service.llistarTasques();
             break;
         case 5:
             answer = await mostraMenu(idTasca);
-            service.mostrarTasca(answer.id);
+            console.log(answer)
+            service.veureTasca(answer.idTasca);
             console.log(answer);
             break;
 
