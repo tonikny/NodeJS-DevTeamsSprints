@@ -31,14 +31,25 @@ class TascaService {
 
   async actualitzarTasca(id,usuari,nom,descripcio,estat,hora_inici,hora_final) {
     const tasca = new Tasca();
-    const dades = {id, nom,descripcio,hora_inici,hora_final,estat,usuari}; 
+    const dades = {id,nom,descripcio,hora_inici,hora_final,estat,usuari}; 
     const tascaAntiga = await this.cercarTasca(id);
-    Object.values(dades).forEach(k=>{
-      if(k === ''){
-        console.log(tascaAntiga.k);
-        //dades.k = tascaAntiga.k
-      }
-    })
+    if(dades.nom === ''){
+      dades.nom = tascaAntiga.nom
+    }if(dades.descripcio === ''){
+      dades.descripcio = tascaAntiga.descripcio
+    }if(dades.hora_final === ''){
+      dades.hora_final = tascaAntiga.hora_final
+    }if(dades.hora_inici === ''){
+      dades.hora_inici = tascaAntiga.hora_inici
+    }
+    // Object.keys(dades).forEach(k=>{
+    //   console.log(dades.k)
+    //   if(dades.k === ''){
+    //     //dades.k = tascaAntiga.k
+    //     console.log('if')
+    //     console.log(dades.k)
+    //   }
+    //})
     return await tasca.actualitzar(dades);
   }
 

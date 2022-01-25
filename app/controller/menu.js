@@ -33,7 +33,7 @@ const selected = async (service,username,opcio) => {
         case 2: 
             answer = await mostraMenu(editarTasca);
             service.actualitzarTasca(answer.idTasca,username,answer.nom,answer.descripcio,answer.estat,answer.hora_inici,answer.hora_final)
-            console.log(answer);
+            //console.log(answer);
             break;
         case 3:
             answer = await mostraMenu(idTasca);
