@@ -8,8 +8,8 @@ class TascaService {
     this.database = database;
   }
 
-  afegirTasca(username,nom,descripcio,hora_inici,hora_final,estat) {
-    const dades = {nom,descripcio,hora_inici,hora_final,estat,username};
+  afegirTasca(usuari,nom,descripcio,estat,hora_inici,hora_final) {
+    const dades = {nom,descripcio,hora_inici,hora_final,estat,usuari};
     const tasca = new Tasca(dades);
     tasca.afegir();
   }
@@ -23,13 +23,13 @@ class TascaService {
 
   async cercarTasca(id) {
     const tasca = new Tasca();
-    console.log(`cercar tasca${tasca.obtenir(id)}`)
+    console.log(`cercar tasca ${tasca.obtenir(id)}`)
     return await tasca.obtenir(id);
 
   }
 
-  async actualitzarTasca(dades) {
-    
+  async actualitzarTasca(id,usuari,nom,descripcio,estat,hora_inici,hora_final) {
+    const dades = {id, nom,descripcio,hora_inici,hora_final,estat,usuari};
     const tasca = new Tasca();
     return await tasca.actualitzar(dades);
   }
@@ -42,9 +42,10 @@ class TascaService {
   async llistarTasques() {
     const tasca = new Tasca();
     const tasques = await tasca.llistar();
-    for (let i = 0; i < tasques.length; i ++) {
-      console.log(`tasca : ${JSON.stringify(tasques[i])}`)
-    }
+    console.table(tasques)
+    // for (let i = 0; i < tasques.length; i ++) {
+    //   console.log(`tasca : ${JSON.stringify(tasques[i])}`)
+    // }
   }
 
 }

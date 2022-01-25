@@ -27,14 +27,12 @@ const selected = async (service,username,opcio) => {
 
         case 1: 
             answer = await mostraMenu(novaTasca);
-            
-            console.log(answer);
-            service.afegirTasca(username,answer.nom,answer.descripcio,answer.estat);
-            console.log("crear tasca");
+            service.afegirTasca(username,answer.nom,answer.descripcio,answer.estat,answer.hora_inici,answer.hora_final);
             break;
 
         case 2: 
-            answer = await mostraMenu(idTasca);
+            answer = await mostraMenu(editarTasca);
+            service.actualitzarTasca(answer.idTasca,username,answer.nom,answer.descripcio,answer.estat,answer.hora_inici,answer.hora_final)
             console.log(answer);
             break;
         case 3:
@@ -100,6 +98,49 @@ const novaTasca = [
         name: "estat",
         message: "Quin estat?",
         choices: ["pendent", "començat","finalitzat"]
+    },
+    {
+        type: "input",
+        name: "hora_inici",
+        message: "A quina hora comença?"
+    },
+    {
+        type: "input",
+        name: "hora_final",
+        message: "A quina hora acaba?"
+    }
+]
+const editarTasca = [
+    {
+        type: "number",
+        name: "idTasca",
+        message: "id de la tasca?"
+    },
+    {
+        type: "input",
+        name: "nom",
+        message: "Nom de la tasca?"
+    },
+    {
+        type: "input",
+        name: "descripcio",
+        message: "Descripció:"
+    },
+    {
+        type: "list",
+        name: "estat",
+        message: "Quin estat?",
+        choices: ["pendent", "començat","finalitzat"]
+    },
+    {
+        type: "input",
+        name: "hora_inici",
+        message: "A quina hora comença?"
+    },
+    {
+        type: "input",
+        name: "hora_final",
+        message: "A quina hora acaba?"
     }
 ]
 module.exports = {start}
