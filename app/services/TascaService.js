@@ -10,6 +10,7 @@ class TascaService {
 
   afegirTasca(usuari,nom,descripcio,estat,hora_inici,hora_final) {
     const dades = {nom,descripcio,hora_inici,hora_final,estat,usuari};
+    this.compararTasca(dades)
     const tasca = new Tasca(dades);
     tasca.afegir();
   }
@@ -29,8 +30,10 @@ class TascaService {
   }
 
   async actualitzarTasca(id,usuari,nom,descripcio,estat,hora_inici,hora_final) {
-    const dades = {id, nom,descripcio,hora_inici,hora_final,estat,usuari};
     const tasca = new Tasca();
+    const dades = {id, nom,descripcio,hora_inici,hora_final,estat,usuari};
+    await this.cercarTasca(id)
+    
     return await tasca.actualitzar(dades);
   }
 
