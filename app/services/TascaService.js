@@ -3,9 +3,9 @@ const fs = require('fs');
 
 class TascaService {
 
-  constructor(database) {
+  constructor(model) {
     const tasca = new Tasca();
-    this.database = database;
+    this.model = model;
   }
 
   afegirTasca(usuari,nom,descripcio,estat,hora_inici,hora_final) {
