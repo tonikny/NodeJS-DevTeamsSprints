@@ -8,40 +8,38 @@ class TascaService {
     this.database = database;
   }
 
-  afegirTasca(dades) {
-    console.log('afegir tasca')
+  afegirTasca(username,nom,descripcio,estat) {
+    const dades = {username,nom,descripcio,estat};
     const tasca = new Tasca(dades);
-    return tasca.afegir();
+    tasca.afegir();
   }
 
-  veureTasca(id) {
+  async veureTasca(id) {
     const tasca = new Tasca();
-  
-    console.log(`La tasca ID ${ id }`)
-    const tascaTrobada = this.cercarTasca(id);
-    console.log(`La tasca es ${ tascaTrobada }`);
+    const tascaTrobada = await this.cercarTasca(id);
+    console.table(tascaTrobada);
     
   }
 
-  cercarTasca(id) {
+  async cercarTasca(id) {
     const tasca = new Tasca();
     console.log(`cercar tasca${tasca.obtenir(id)}`)
-    return tasca.obtenir(id);
+    return await tasca.obtenir(id);
 
   }
 
   async actualitzarTasca(dades) {
+    
     const tasca = new Tasca();
     return await tasca.actualitzar(dades);
   }
 
   async esborrarTasca(id) {
     const tasca = new Tasca();
-    return await tasca.esborrar(id);
+    await tasca.esborrar(id);
   }
 
   async llistarTasques() {
-    console.log('llistartasques')
     const tasca = new Tasca();
     const tasques = await tasca.llistar();
     for (let i = 0; i < tasques.length; i ++) {
