@@ -8,8 +8,8 @@ class TascaService {
     this.database = database;
   }
 
-  afegirTasca(username,nom,descripcio,estat) {
-    const dades = {username,nom,descripcio,estat};
+  afegirTasca(username,nom,descripcio,hora_inici,hora_final,estat) {
+    const dades = {nom,descripcio,hora_inici,hora_final,estat,username};
     const tasca = new Tasca(dades);
     tasca.afegir();
   }
@@ -36,7 +36,7 @@ class TascaService {
 
   async esborrarTasca(id) {
     const tasca = new Tasca();
-    await tasca.esborrar(id);
+    return await tasca.esborrar(id);
   }
 
   async llistarTasques() {

@@ -39,8 +39,7 @@ const selected = async (service,username,opcio) => {
             break;
         case 3:
             answer = await mostraMenu(idTasca);
-            console.log(`answer id ${answer.id}`)
-            service.esborrarTasca(answer.id);
+            service.esborrarTasca(answer.idTasca);
             break;
         case 4:
             await service.llistarTasques();
