@@ -1,7 +1,5 @@
 const inquirer  = require('inquirer');
 
-
-
 // el programaça aqui
 const start = async (service) =>{ 
     const user = await mostraMenu(usernamePreguntes);
@@ -29,27 +27,24 @@ const selected = async (service,username,opcio) => {
 
         case 1: 
             answer = await mostraMenu(novaTasca);
-            // servei.crear(username,answer.nom,answer.descripcio,answer.estat);
-            console.log("crear tasca");
-            console.log(answer);
+            service.afegirTasca(username,answer.nom,answer.descripcio,answer.estat,answer.hora_inici,answer.hora_final);
             break;
 
         case 2: 
-            answer = await mostraMenu(idTasca);
-            console.log(answer);
+            answer = await mostraMenu(editarTasca);
+            service.actualitzarTasca(answer.idTasca,username,answer.nom,answer.descripcio,answer.estat,answer.hora_inici,answer.hora_final)
+            //console.log(answer);
             break;
         case 3:
             answer = await mostraMenu(idTasca);
-            // servei.esborrar(answer.id);
-            console.log(answer);
+            service.esborrarTasca(answer.idTasca);
             break;
         case 4:
-            console.log("llistar");
+            await service.llistarTasques();
             break;
         case 5:
             answer = await mostraMenu(idTasca);
-            // servei.mostrarTasca(answer.id);
-            console.log(answer);
+            service.veureTasca(answer.idTasca);
             break;
 
         case 6:
@@ -103,6 +98,49 @@ const novaTasca = [
         name: "estat",
         message: "Quin estat?",
         choices: ["pendent", "començat","finalitzat"]
+    },
+    {
+        type: "input",
+        name: "hora_inici",
+        message: "A quina hora comença?"
+    },
+    {
+        type: "input",
+        name: "hora_final",
+        message: "A quina hora acaba?"
+    }
+]
+const editarTasca = [
+    {
+        type: "number",
+        name: "idTasca",
+        message: "id de la tasca?"
+    },
+    {
+        type: "input",
+        name: "nom",
+        message: "Nom de la tasca?"
+    },
+    {
+        type: "input",
+        name: "descripcio",
+        message: "Descripció:"
+    },
+    {
+        type: "list",
+        name: "estat",
+        message: "Quin estat?",
+        choices: ["pendent", "començat","finalitzat"]
+    },
+    {
+        type: "input",
+        name: "hora_inici",
+        message: "A quina hora comença?"
+    },
+    {
+        type: "input",
+        name: "hora_final",
+        message: "A quina hora acaba?"
     }
 ]
 module.exports = {start}

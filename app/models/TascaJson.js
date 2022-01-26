@@ -2,7 +2,7 @@ const fs = require('fs/promises');
 
 class Tasca {
 
-  ruta = 'database/tasques_db.json';
+  ruta = 'app/database/tasques_db.json';
 
   constructor(dades) {
     Object.assign(this, dades);
