@@ -1,4 +1,4 @@
-const { Tasca } = require('../models/TascaJson');
+const { Tasca } = require('../models/TascaSql');
 const fs = require('fs');
 
 class TascaService {
