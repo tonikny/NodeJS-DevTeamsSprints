@@ -1,5 +1,5 @@
 const { Sequelize, Model, DataTypes } = require('sequelize');
-const sequelize = new Sequelize('sqlite::memory:',{
+const sequelize = new Sequelize('sqlite::memory:', {
   //logging: false
 });
 
@@ -11,12 +11,14 @@ class Tasca {
   }
 
   async llistar() {
-    const tasques = await TascaSequelize.findAll();
+    const tasques = await TascaSequelize.findAll({ raw: true });
     console.log("tasques:", tasques);
+    return tasques;
   }
 
   async afegir() {
-
+    Object.assign(this.dbo, this);
+    await this.dbo.save();
   }
 
   async esborrar(id) {
@@ -40,7 +42,7 @@ const TascaSequelize = sequelize.define('Tasca', {
   },
   nom: {
     type: DataTypes.STRING,
-    allowNull: false
+    //allowNull: false
   },
   estat: {
     type: DataTypes.STRING
@@ -58,11 +60,16 @@ const TascaSequelize = sequelize.define('Tasca', {
     type: DataTypes.STRING
   }
 }, {
-  // Other model options go here
+  createdAt: false,
+  updatedAt: false
 });
 
 (async () => {
   await sequelize.sync();
+  await TascaSequelize.bulkCreate([
+    { nom: 'abc123' },
+    { nom: 'prova', usuari:'toni' }
+  ]);
 })();
 
 
