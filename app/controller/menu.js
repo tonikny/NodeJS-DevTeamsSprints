@@ -38,6 +38,7 @@ const selected = async (service,username,opcio) => {
         case 3:
             answer = await mostraMenu(idTasca);
             service.esborrarTasca(answer.idTasca);
+            
             break;
         case 4:
             await service.llistarTasques();
@@ -76,7 +77,7 @@ const menuPreguntes = [
 
 const idTasca = [
     {
-        type: "number",
+        type: "input",
         name: "idTasca",
         message: "id de la tasca?"
     }
@@ -112,7 +113,7 @@ const novaTasca = [
 ]
 const editarTasca = [
     {
-        type: "number",
+        type: "input",
         name: "idTasca",
         message: "id de la tasca?"
     },

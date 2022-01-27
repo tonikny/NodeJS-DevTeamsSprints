@@ -6,55 +6,59 @@ mongoose.connect("mongodb://localhost:27017/testdb")
 const Schema = mongoose.Schema;
 
 class Tasca {
-
+   // tascaObj = {}
     constructor(dades) {
         Object.assign(this, dades);
     }
   
     async llistar() {
-        console.log('llistar')
-        console.table(tasca.)
+       const tasques = await TascaModel.find()
+       if(!tasques.length){
+           return null;
+       }
+       return tasques.map(x => x.toObject());
     }
   
     async afegir() {
-        const newTasca = new tasca()
-        await newTasca.save()
-        .then (()=> console.log('save'))
+        try {
+            const newTasca = new TascaModel({
+                nom: this.nom,
+                descripcio: this.descripcio,
+                hora_inici: this.hora_inici,
+                hora_final: this.hora_final,
+                estat: this.estat,
+                usuari: this.usuari
+            })
+            await newTasca.save()
+        } catch (e) {
+            console.log(e)
+        }
     }
   
     async esborrar(id) {
-        console.log(tasca.find({_id: id}))
-       // tasca.deleteOne({_id: id})
+       await TascaModel.findOneAndDelete({_id: id})
     }
   
     async obtenir(id) {
-        console.log(tasca.find({_id: id}))
+        return await TascaModel.find({_id:id})
     }
   
     async actualitzar(dades) {
-  
+        await TascaModel.findOneAndUpdate({_id:dades.id}, dades)
     }
 }
   
 
 const tascaSchema = new Schema({
-  nom:  String, // String is shorthand for {type: String}
+  nom:  String, 
   descripcio: String,
   hora_inici:   String,
   hora_final: String,
   estat: String,
   usuari: String
 });
-const tasca = mongoose.model('tasca',tascaSchema)
 
-const newTasca = new tasca({
-    nom: "test",
-    descripcio:"test" ,
-    hora_inici: "test" ,
-    hora_final: "test" ,
-    estat: "test",
-    usuari: "test" })
+const TascaModel = mongoose.model('tasca',tascaSchema)
 
-//const Tasca = mongoose.model('todos', tascaSchema);
 
 module.exports = { Tasca };
