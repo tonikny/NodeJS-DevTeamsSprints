@@ -6,7 +6,6 @@ mongoose.connect("mongodb://localhost:27017/testdb")
 const Schema = mongoose.Schema;
 
 class Tasca {
-   // tascaObj = {}
     constructor(dades) {
         Object.assign(this, dades);
     }
