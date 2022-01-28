@@ -18,7 +18,7 @@ class TascaService {
   }
 
   async cercarTasca(id) {
-    console.log(`cercar tasca ${this.model.obtenir(id)}`)
+    //console.log(`cercar tasca ${this.model.obtenir(id)}`)
     return await this.model.obtenir(id);
   }
 

@@ -6,6 +6,7 @@ class Tasca {
 
   constructor(dades) {
     Object.assign(this, dades);
+    //this.dbo = TascaSequelize.build(dades);
   }
 
   async _llegirArxiu() {
