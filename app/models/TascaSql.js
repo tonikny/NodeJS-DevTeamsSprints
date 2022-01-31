@@ -1,7 +1,7 @@
 const { Sequelize, Model, DataTypes } = require('sequelize');
 const sequelize = new Sequelize('sqlite::memory:', {logging: false});
 
-class Tasca {
+class TascaSql {
 
   constructor(dades) {
     Object.assign(this, dades);
@@ -78,4 +78,4 @@ const TascaSequelize = sequelize.define('Tasca', {
 })();
 
 
-module.exports = { Tasca };
+module.exports = TascaSql ;

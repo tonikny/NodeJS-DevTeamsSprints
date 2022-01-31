@@ -1,6 +1,6 @@
 const fs = require('fs/promises');
 
-class Tasca {
+class TascaJson {
 
   ruta = 'app/database/tasques_db.json';
 
@@ -84,4 +84,4 @@ class Tasca {
 }
 
 
-module.exports = { Tasca };
+module.exports =  TascaJson ;

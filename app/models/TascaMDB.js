@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 
-mongoose.connect("mongodb://localhost:27017/testdb")
+mongoose.connect(process.env.MONGO_HOST +":"+ process.env.MONGO_PORT+"/"+process.env.MONGO_DATABASE)
      .then(()=>console.log('connected to mongodb'))
 
 const Schema = mongoose.Schema;
 
-class Tasca {
+class TascaMongo {
     constructor(dades) {
         Object.assign(this, dades);
     }
@@ -60,4 +60,4 @@ const tascaSchema = new Schema({
 const TascaModel = mongoose.model('tasca',tascaSchema)
 
 
-module.exports = { Tasca };
+module.exports =  TascaMongo ;

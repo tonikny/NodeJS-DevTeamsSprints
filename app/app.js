@@ -3,25 +3,26 @@ const app = require('./controller/menu');
 const config = require('./config');
 
 const { TascaService } = require('./services/TascaService');
-const  { TascaMongo }  = require('./models/TascaMDB');
-const  { TascaJson }  = require('./models/TascaJson');
-const  { TascaMysql }  = require('./models/TascaSql');
 
 
 
-
-let model = null;
-
+let tascaService = null;
 switch (config.database){
     case "MONGO":
-  model = new TascaMongo();
+        const   TascaMongo   = require('./models/TascaMDB');
+        const  modelMongo = new TascaMongo();
+        tascaService = new TascaService(modelMongo);
         break;
 
     case "MYSQL":
-  model = new TascaMysql();
+        const   TascaSql   = require('./models/TascaSql');
+        const modelSql = new TascaSql();
+        tascaService = new TascaService(modelSql);
         break;
     default:
-  model = new TascaJson();
+        const   TascaJson   = require('./models/TascaJson');
+        const modelJson = new TascaJson();
+        tascaService = new TascaService(modelJson);
         break;
 
 }
@@ -30,7 +31,6 @@ switch (config.database){
 
 
 
-const tascaService = new TascaService(model);
 app.start(tascaService);
 
 
