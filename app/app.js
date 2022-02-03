@@ -14,7 +14,7 @@ switch (config.database){
         tascaService = new TascaService(modelMongo);
         break;
 
-    case "MYSQL":
+    case "SQLITE":
         const   TascaSql   = require('./models/TascaSql');
         const modelSql = new TascaSql();
         tascaService = new TascaService(modelSql);

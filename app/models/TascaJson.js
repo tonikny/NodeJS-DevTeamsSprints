@@ -2,7 +2,7 @@ const fs = require('fs/promises');
 
 class TascaJson {
 
-  ruta = 'app/database/tasques_db.json';
+  ruta = process.env.JSON_FILE;
 
   constructor(dades) {
     Object.assign(this, dades);

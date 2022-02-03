@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.connect(process.env.MONGO_HOST +":"+ process.env.MONGO_PORT+"/"+process.env.MONGO_DATABASE)
+mongoose.connect(process.env.MONGO_CONN)
      .then(()=>console.log('connected to mongodb'))
 
 const Schema = mongoose.Schema;

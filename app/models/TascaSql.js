@@ -1,5 +1,5 @@
 const { Sequelize, Model, DataTypes } = require('sequelize');
-const sequelize = new Sequelize('sqlite::memory:', {logging: false});
+const sequelize = new Sequelize(process.env.SQLITE_CONN, {logging: false});
 
 class TascaSql {
 
