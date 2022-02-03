@@ -63,7 +63,7 @@ const selected = async (service,username,opcio) => {
                 }
             ]
             answer = await mostraMenu(editarTasca);
-            service.actualitzarTasca(parseInt(task.idTasca),username,answer.nom,answer.descripcio,answer.estat,answer.hora_inici,answer.hora_final)
+            service.actualitzarTasca(parseInt(task.id),username,answer.nom,answer.descripcio,answer.estat,answer.hora_inici,answer.hora_final)
             //console.log(answer);
             break;
         case 3:
