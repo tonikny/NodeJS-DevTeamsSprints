@@ -55,7 +55,7 @@ class Tasca {
   async esborrar(id) {
     try {
       const tasquesAbans = await this._llegirArxiu();
-      const tasquesDespres = tasquesAbans.filter(o => o.id != id);
+      const tasquesDespres = tasquesAbans.filter(o => o.id !== id);
       await this._escriureArxiu(tasquesDespres);
       return true;
     } catch (e) {

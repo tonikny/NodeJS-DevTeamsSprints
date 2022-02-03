@@ -5,12 +5,12 @@ const start = async (service) =>{
     const user = await mostraMenu(usernamePreguntes);
     let sortir = false;
 
-do{
-    const menu = await mostraMenu(menuPreguntes);
-    await   selected(service,user.name,menu.opcio);
-    if (menu.opcio == 6 ){
+    do{
+        const menu = await mostraMenu(menuPreguntes);
+        await   selected(service,user.name,menu.opcio);
+        if (menu.opcio == 6 ){
             sortir = true;
-    }
+        }
     }while(!sortir);
 }
 
@@ -31,14 +31,45 @@ const selected = async (service,username,opcio) => {
             break;
 
         case 2: 
+            const resposta = await mostraMenu(idTasca);
+            const task = await service.veureTasca(parseInt(resposta.idTasca));
+            console.table(task);
+            const editarTasca = [
+                {
+                    type: "input",
+                    name: "nom",
+                    message: "Nom de la tasca?["+ task.nom +"]"
+                },
+                {
+                    type: "input",
+                    name: "descripcio",
+                    message: "Descripció:["+ task.descripcio +"]"
+                },
+                {
+                    type: "list",
+                    name: "estat",
+                    message: "Quin estat?["+ task.estat +"]",
+                    choices: ["pendent", "començat","finalitzat"]
+                },
+                {
+                    type: "input",
+                    name: "hora_inici ["+ task.hora_inici +"]",
+                    message: "A quina hora comença?"
+                },
+                {
+                    type: "input",
+                    name: "hora_final ["+ task.hora_final +"]",
+                    message: "A quina hora acaba?"
+                }
+            ]
             answer = await mostraMenu(editarTasca);
-            service.actualitzarTasca(answer.idTasca,username,answer.nom,answer.descripcio,answer.estat,answer.hora_inici,answer.hora_final)
+            service.actualitzarTasca(parseInt(task.idTasca),username,answer.nom,answer.descripcio,answer.estat,answer.hora_inici,answer.hora_final)
             //console.log(answer);
             break;
         case 3:
             answer = await mostraMenu(idTasca);
-            service.esborrarTasca(answer.idTasca);
-            
+            service.esborrarTasca(parseInt(answer.idTasca));
+
             break;
         case 4:
             const tasques =  await service.llistarTasques();
@@ -47,7 +78,7 @@ const selected = async (service,username,opcio) => {
             break;
         case 5:
             answer = await mostraMenu(idTasca);
-            const tasca = await service.veureTasca(answer.idTasca);
+            const tasca = await service.veureTasca(parseInt(answer.idTasca));
             console.table(tasca);
             break;
 
@@ -87,39 +118,6 @@ const idTasca = [
 ]
 
 const novaTasca = [
-    {
-        type: "input",
-        name: "nom",
-        message: "Nom de la tasca?"
-    },
-    {
-        type: "input",
-        name: "descripcio",
-        message: "Descripció:"
-    },
-    {
-        type: "list",
-        name: "estat",
-        message: "Quin estat?",
-        choices: ["pendent", "començat","finalitzat"]
-    },
-    {
-        type: "input",
-        name: "hora_inici",
-        message: "A quina hora comença?"
-    },
-    {
-        type: "input",
-        name: "hora_final",
-        message: "A quina hora acaba?"
-    }
-]
-const editarTasca = [
-    {
-        type: "input",
-        name: "idTasca",
-        message: "id de la tasca?"
-    },
     {
         type: "input",
         name: "nom",
