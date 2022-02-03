@@ -47,7 +47,7 @@ const selected = async (service,username,opcio) => {
             break;
         case 5:
             answer = await mostraMenu(idTasca);
-            let tasca = service.veureTasca(answer.idTasca);
+            let tasca = await service.veureTasca(answer.idTasca);
             console.table(tasca);
             break;
 
