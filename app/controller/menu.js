@@ -41,13 +41,13 @@ const selected = async (service,username,opcio) => {
             
             break;
         case 4:
-            let tasques =  await service.llistarTasques();
+            const tasques =  await service.llistarTasques();
             console.table(tasques);
 
             break;
         case 5:
             answer = await mostraMenu(idTasca);
-            let tasca = await service.veureTasca(answer.idTasca);
+            const tasca = await service.veureTasca(answer.idTasca);
             console.table(tasca);
             break;
 
