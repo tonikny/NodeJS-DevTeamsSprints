@@ -14,7 +14,8 @@ class TascaService {
 
   async veureTasca(id) {
     const tascaTrobada = await this.cercarTasca(id);
-    console.table(tascaTrobada);
+      return tascaTrobada;
+//    console.table(tascaTrobada);
   }
 
   async cercarTasca(id) {
@@ -51,7 +52,8 @@ class TascaService {
 
   async llistarTasques() {
     const tasques = await this.model.llistar();
-    console.table(tasques)
+      return tasques;
+    //console.table(tasques)
   }
 
 }
