@@ -1,10 +1,9 @@
 
 const app = require('./controller/menu');
-const config = require('./config');
 
 const { TascaService } = require('./services/TascaService');
 
-switch (config.database) {
+switch (process.env.DATABASE) {
   case "MONGO":
     modelType = './models/TascaMDB';
     break;
