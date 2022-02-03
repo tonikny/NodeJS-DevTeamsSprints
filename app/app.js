@@ -1,4 +1,4 @@
-
+require('dotenv').config()
 const app = require('./controller/menu');
 
 const { TascaService } = require('./services/TascaService');
