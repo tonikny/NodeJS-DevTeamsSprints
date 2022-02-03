@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const { INTEGER } = require('sequelize/dist');
 
 mongoose.connect(process.env.MONGO_CONN)
      .then(()=>console.log('connected to mongodb'))
