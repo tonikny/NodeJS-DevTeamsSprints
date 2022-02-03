@@ -4,31 +4,19 @@ const config = require('./config');
 
 const { TascaService } = require('./services/TascaService');
 
-
-
-let tascaService = null;
-switch (config.database){
-    case "MONGO":
-        const   TascaMongo   = require('./models/TascaMDB');
-        const  modelMongo = new TascaMongo();
-        tascaService = new TascaService(modelMongo);
-        break;
-
-    case "SQLITE":
-        const   TascaSql   = require('./models/TascaSql');
-        const modelSql = new TascaSql();
-        tascaService = new TascaService(modelSql);
-        break;
-    default:
-        const   TascaJson   = require('./models/TascaJson');
-        const modelJson = new TascaJson();
-        tascaService = new TascaService(modelJson);
-        break;
-
+switch (config.database) {
+  case "MONGO":
+    modelType = './models/TascaMDB';
+    break;
+  case "SQLITE":
+    modelType = './models/TascaSql';
+    break;
+  default:
+    modelType = './models/TascaJson';
 }
-
-
-
+const Tasca = require(modelType);
+const model = new Tasca();
+const tascaService = new TascaService(model);
 
 
 app.start(tascaService);

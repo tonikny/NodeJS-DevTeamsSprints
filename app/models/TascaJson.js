@@ -1,6 +1,6 @@
 const fs = require('fs/promises');
 
-class TascaJson {
+class Tasca {
 
   ruta = process.env.JSON_FILE;
 
@@ -84,4 +84,4 @@ class TascaJson {
 }
 
 
-module.exports =  TascaJson ;
+module.exports =  Tasca ;

@@ -5,7 +5,7 @@ mongoose.connect(process.env.MONGO_CONN)
 
 const Schema = mongoose.Schema;
 
-class TascaMongo {
+class Tasca {
     constructor(dades) {
         Object.assign(this, dades);
     }
@@ -60,4 +60,4 @@ const tascaSchema = new Schema({
 const TascaModel = mongoose.model('tasca',tascaSchema)
 
 
-module.exports =  TascaMongo ;
+module.exports =  Tasca ;
