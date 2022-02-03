@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { INTEGER } = require('sequelize/dist');
 
 mongoose.connect(process.env.MONGO_CONN)
      .then(()=>console.log('connected to mongodb'))
@@ -20,7 +21,11 @@ class Tasca {
   
     async afegir() {
         try {
+            const tasques = await TascaModel.find()
+            console.log(tasques)
+            const id = (tasques.length === 0) ? 1 : Math.max.apply(Math, tasques.map(function (o) { return o.id; })) + 1;
             const newTasca = new TascaModel({
+                _id: id,
                 nom: this.nom,
                 descripcio: this.descripcio,
                 hora_inici: this.hora_inici,
@@ -39,7 +44,8 @@ class Tasca {
     }
   
     async obtenir(id) {
-        return await TascaModel.find({_id:id})
+        const obtingut =  await TascaModel.find({_id: id})
+        return obtingut.map(x => x.toObject())
     }
   
     async actualitzar(dades) {
@@ -49,6 +55,7 @@ class Tasca {
   
 
 const tascaSchema = new Schema({
+  _id: Number,
   nom:  String, 
   descripcio: String,
   hora_inici:   String,

@@ -14,8 +14,8 @@ class TascaService {
 
   async veureTasca(id) {
     const tascaTrobada = await this.cercarTasca(id);
+    console.table(tascaTrobada);
       return tascaTrobada;
-//    console.table(tascaTrobada);
   }
 
   async cercarTasca(id) {
