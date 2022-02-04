@@ -32,7 +32,7 @@ const selected = async (service,username,opcio) => {
 
         case 2: 
             const resposta = await mostraMenu(idTasca);
-            const task = await service.veureTasca(parseInt(resposta.idTasca));
+            const task = await service.veureTasca(resposta.idTasca);
             console.table(task);
             const editarTasca = [
                 {
@@ -53,22 +53,22 @@ const selected = async (service,username,opcio) => {
                 },
                 {
                     type: "input",
-                    name: "hora_inici ["+ task.hora_inici +"]",
-                    message: "A quina hora comença?"
+                    name: "hora_inici",
+                    message: "A quina hora comença? ["+ task.hora_inici +"]"
                 },
                 {
                     type: "input",
-                    name: "hora_final ["+ task.hora_final +"]",
-                    message: "A quina hora acaba?"
+                    name: "hora_final" ,
+                    message: "A quina hora acaba?["+ task.hora_final +"]"
                 }
             ]
             answer = await mostraMenu(editarTasca);
-            service.actualitzarTasca(parseInt(task.id),username,answer.nom,answer.descripcio,answer.estat,answer.hora_inici,answer.hora_final)
+            service.actualitzarTasca(task.id,username,answer.nom,answer.descripcio,answer.estat,answer.hora_inici,answer.hora_final)
             //console.log(answer);
             break;
         case 3:
             answer = await mostraMenu(idTasca);
-            service.esborrarTasca(parseInt(answer.idTasca));
+            service.esborrarTasca(answer.idTasca);
 
             break;
         case 4:
@@ -111,7 +111,7 @@ const menuPreguntes = [
 
 const idTasca = [
     {
-        type: "input",
+        type: "number",
         name: "idTasca",
         message: "id de la tasca?"
     }
