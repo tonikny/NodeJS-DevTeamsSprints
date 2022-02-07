@@ -17,7 +17,7 @@ class TascaService {
 
   async actualitzarTasca(id,usuari,nom,descripcio,estat,hora_inici,hora_final) {
     const dades = {id,nom,descripcio,hora_inici,hora_final,estat,usuari}; 
-    const tascaAntiga = await this.cercarTasca(id);
+    const tascaAntiga = await this.veureTasca(id);
     if(dades.nom === ''){
       dades.nom = tascaAntiga.nom
     }if(dades.descripcio === ''){

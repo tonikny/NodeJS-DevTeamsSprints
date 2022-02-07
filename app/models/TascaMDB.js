@@ -1,10 +1,11 @@
 const mongoose = require('mongoose');
 
-mongoose.connect(process.env.MONGO_CONN+'?serverSelectionTimeoutMS=5000')
-    .then(() => console.log('connected to mongodb'))
-    .catch(() =>{ 
+mongoose.connect(process.env.MONGO_CONN + '?serverSelectionTimeoutMS=5000')
+    //.then(() => console.log('connected to mongodb'))
+    .catch(() => {
         console.log("Conexió a MongoDB ha trigat massa")
-        process.exit()});
+        process.exit()
+    });
 
 const Schema = mongoose.Schema;
 
@@ -49,13 +50,16 @@ class Tasca {
     }
 
     async obtenir(id) {
-        const obtingut = await TascaModel.find({ _id: id })
-        return obtingut.map(x => {
-            const y = x.toObject();
-            delete y['__v'];
-            return y;
-        });
+        const obtingut = await TascaModel.findById(id);
+        if (obtingut) {
+            const tasca = (({ _id, nom, descripcio, estat, hora_inici, hora_final, usuari }) =>
+                ({ _id, nom, descripcio, estat, hora_inici, hora_final, usuari }))(obtingut);
+            return tasca;
+        } else {
+            return undefined;
+        }
     }
+
 
     async actualitzar(dades) {
         await TascaModel.findOneAndUpdate({ _id: dades.id }, dades)
