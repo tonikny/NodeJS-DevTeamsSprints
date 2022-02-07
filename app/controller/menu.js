@@ -88,6 +88,7 @@ const selected = async (service,username,opcio) => {
             sortir = true;
             break;
     }
+    process.exit();
 }
 const usernamePreguntes = [
     {
