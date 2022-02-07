@@ -12,11 +12,6 @@ class TascaService {
   }
 
   async veureTasca(id) {
-    const tascaTrobada = await this.cercarTasca(id);
-      return tascaTrobada;
-  }
-
-  async cercarTasca(id) {
     return await this.model.obtenir(id);
   }
 
