@@ -12,7 +12,11 @@ class TascaService {
   }
 
   async veureTasca(id) {
-    return await this.model.obtenir(id);
+    if(await this.model.obtenir(id) == ''){
+      console.log('id no trobada')
+      process.exit()
+    }
+    else return await this.model.obtenir(id);
   }
 
   async actualitzarTasca(id,usuari,nom,descripcio,estat,hora_inici,hora_final) {
