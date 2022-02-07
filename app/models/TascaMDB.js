@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 mongoose.connect(process.env.MONGO_CONN)
-     .then(()=>console.log('connected to mongodb'))
+    .then(() => console.log('connected to mongodb'))
 
 const Schema = mongoose.Schema;
 
@@ -9,15 +9,19 @@ class Tasca {
     constructor(dades) {
         Object.assign(this, dades);
     }
-  
+
     async llistar() {
-       const tasques = await TascaModel.find()
-       if(!tasques.length){
-           return null;
-       }
-       return tasques.map(x => x.toObject());
+        const tasques = await TascaModel.find()
+        if (!tasques.length) {
+            return null;
+        }
+        return tasques.map(x => {
+            const y = x.toObject();
+            delete y['__v'];
+            return y;
+        });
     }
-  
+
     async afegir() {
         try {
             const tasques = await TascaModel.find()
@@ -37,33 +41,33 @@ class Tasca {
             console.log(e)
         }
     }
-  
+
     async esborrar(id) {
-       await TascaModel.findOneAndDelete({_id: id})
+        await TascaModel.findOneAndDelete({ _id: id })
     }
-  
+
     async obtenir(id) {
-        const obtingut =  await TascaModel.find({_id: id})
+        const obtingut = await TascaModel.find({ _id: id })
         return obtingut.map(x => x.toObject())
     }
-  
+
     async actualitzar(dades) {
-        await TascaModel.findOneAndUpdate({_id:dades.id}, dades)
+        await TascaModel.findOneAndUpdate({ _id: dades.id }, dades)
     }
 }
-  
+
 
 const tascaSchema = new Schema({
-  _id: Number,
-  nom:  String, 
-  descripcio: String,
-  hora_inici:   String,
-  hora_final: String,
-  estat: String,
-  usuari: String
+    _id: Number,
+    nom: String,
+    descripcio: String,
+    hora_inici: String,
+    hora_final: String,
+    estat: String,
+    usuari: String
 });
 
-const TascaModel = mongoose.model('tasca',tascaSchema)
+const TascaModel = mongoose.model('tasca', tascaSchema)
 
 
-module.exports =  Tasca ;
+module.exports = Tasca;
