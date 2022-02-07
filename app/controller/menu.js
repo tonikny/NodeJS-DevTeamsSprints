@@ -1,71 +1,75 @@
-const inquirer  = require('inquirer');
+const inquirer = require('inquirer');
 
 // el programaça aqui
-const start = async (service) =>{ 
+const start = async (service) => {
     const user = await mostraMenu(usernamePreguntes);
     let sortir = false;
 
-    do{
+    do {
         const menu = await mostraMenu(menuPreguntes);
-        await   selected(service,user.name,menu.opcio);
-        if (menu.opcio == 6 ){
+        await selected(service, user.name, menu.opcio);
+        if (menu.opcio == 6) {
             sortir = true;
         }
-    }while(!sortir);
+    } while (!sortir);
     process.exit();
 }
 
 const mostraMenu = async (question) => {
 
-    const answer = await   inquirer .prompt(question)
+    const answer = await inquirer.prompt(question)
     return answer;
 }
 
-const selected = async (service,username,opcio) => {
-    let  sortir = false
-    let answer = []; 
-    switch(opcio){
+const selected = async (service, username, opcio) => {
+    let sortir = false
+    let answer = [];
+    switch (opcio) {
 
-        case 1: 
+        case 1:
             answer = await mostraMenu(novaTasca);
-            service.afegirTasca(username,answer.nom,answer.descripcio,answer.estat,answer.hora_inici,answer.hora_final);
+            service.afegirTasca(username, answer.nom, answer.descripcio, answer.estat, answer.hora_inici, answer.hora_final);
             break;
 
-        case 2: 
+        case 2:
             const resposta = await mostraMenu(idTasca);
             const task = await service.veureTasca(resposta.idTasca);
-            console.table(task);
-            const editarTasca = [
-                {
-                    type: "input",
-                    name: "nom",
-                    message: "Nom de la tasca?["+ task.nom +"]"
-                },
-                {
-                    type: "input",
-                    name: "descripcio",
-                    message: "Descripció:["+ task.descripcio +"]"
-                },
-                {
-                    type: "list",
-                    name: "estat",
-                    message: "Quin estat?["+ task.estat +"]",
-                    choices: ["pendent", "començat","finalitzat"],
-                    default:task.estat
-                },
-                {
-                    type: "input",
-                    name: "hora_inici",
-                    message: "A quina hora comença? ["+ task.hora_inici +"]"
-                },
-                {
-                    type: "input",
-                    name: "hora_final" ,
-                    message: "A quina hora acaba?["+ task.hora_final +"]"
-                }
-            ]
-            answer = await mostraMenu(editarTasca);
-            service.actualitzarTasca(task._id,username,answer.nom,answer.descripcio,answer.estat,answer.hora_inici,answer.hora_final)
+            if (task) {
+                console.table(task);
+                const editarTasca = [
+                    {
+                        type: "input",
+                        name: "nom",
+                        message: "Nom de la tasca?[" + task.nom + "]"
+                    },
+                    {
+                        type: "input",
+                        name: "descripcio",
+                        message: "Descripció:[" + task.descripcio + "]"
+                    },
+                    {
+                        type: "list",
+                        name: "estat",
+                        message: "Quin estat?[" + task.estat + "]",
+                        choices: ["pendent", "començat", "finalitzat"],
+                        default: task.estat
+                    },
+                    {
+                        type: "input",
+                        name: "hora_inici",
+                        message: "A quina hora comença? [" + task.hora_inici + "]"
+                    },
+                    {
+                        type: "input",
+                        name: "hora_final",
+                        message: "A quina hora acaba?[" + task.hora_final + "]"
+                    }
+                ]
+                answer = await mostraMenu(editarTasca);
+                service.actualitzarTasca(task._id, username, answer.nom, answer.descripcio, answer.estat, answer.hora_inici, answer.hora_final)
+            } else {
+                console.log('No existeix la tasca.');
+            }
             break;
         case 3:
             answer = await mostraMenu(idTasca);
@@ -73,7 +77,7 @@ const selected = async (service,username,opcio) => {
 
             break;
         case 4:
-            const tasques =  await service.llistarTasques();
+            const tasques = await service.llistarTasques();
             console.table(tasques);
 
             break;
@@ -132,7 +136,7 @@ const novaTasca = [
         type: "list",
         name: "estat",
         message: "Quin estat?",
-        choices: ["pendent", "començat","finalitzat"]
+        choices: ["pendent", "començat", "finalitzat"]
     },
     {
         type: "input",
@@ -145,4 +149,4 @@ const novaTasca = [
         message: "A quina hora acaba?"
     }
 ]
-module.exports = {start}
+module.exports = { start }
