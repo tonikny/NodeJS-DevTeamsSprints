@@ -2,6 +2,9 @@ const mongoose = require('mongoose');
 
 mongoose.connect(process.env.MONGO_CONN)
     .then(() => console.log('connected to mongodb'))
+    .catch(error =>{ 
+        console.log(error)
+        process.exit()});
 
 const Schema = mongoose.Schema;
 
