@@ -55,7 +55,7 @@ const TascaSequelize = sequelize.define('Tasca', {
   descripcio: {
     type: DataTypes.STRING
   },
-  nora_inici: {
+  hora_inici: {
     type: DataTypes.STRING
   },
   hora_final: {
@@ -73,7 +73,7 @@ const TascaSequelize = sequelize.define('Tasca', {
   await sequelize.sync();
   await TascaSequelize.bulkCreate([
     { nom: 'abc123' },
-    { nom: 'prova', usuari: 'toni' }
+    { nom: 'prova', estat: 'pendent',descripcio: '',  usuari: 'toni' }
   ]);
 })();
 
