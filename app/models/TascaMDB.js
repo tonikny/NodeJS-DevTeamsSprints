@@ -25,7 +25,6 @@ class Tasca {
     async afegir() {
         try {
             const tasques = await TascaModel.find()
-            console.log(tasques)
             const id = (tasques.length === 0) ? 1 : Math.max.apply(Math, tasques.map(function (o) { return o.id; })) + 1;
             const newTasca = new TascaModel({
                 _id: id,
@@ -48,8 +47,6 @@ class Tasca {
 
     async obtenir(id) {
         const obtingut = await TascaModel.find({ _id: id })
-        //return obtingut.map(x => x.toObject())
-        
         return obtingut.map(x => {
             const y = x.toObject();
             delete y['__v'];
