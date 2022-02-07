@@ -64,7 +64,6 @@ const selected = async (service,username,opcio) => {
             ]
             answer = await mostraMenu(editarTasca);
             service.actualitzarTasca(task.id,username,answer.nom,answer.descripcio,answer.estat,answer.hora_inici,answer.hora_final)
-            //console.log(answer);
             break;
         case 3:
             answer = await mostraMenu(idTasca);
@@ -83,7 +82,6 @@ const selected = async (service,username,opcio) => {
             break;
 
         case 6:
-            // const llista = service.llistar();
             console.log("sortir");
             sortir = true;
             break;
