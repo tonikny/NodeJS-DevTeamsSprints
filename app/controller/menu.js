@@ -12,6 +12,7 @@ const start = async (service) =>{
             sortir = true;
         }
     }while(!sortir);
+    process.exit();
 }
 
 const mostraMenu = async (question) => {
@@ -88,7 +89,6 @@ const selected = async (service,username,opcio) => {
             sortir = true;
             break;
     }
-    process.exit();
 }
 const usernamePreguntes = [
     {
