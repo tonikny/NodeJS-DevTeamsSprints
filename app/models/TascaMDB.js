@@ -48,7 +48,13 @@ class Tasca {
 
     async obtenir(id) {
         const obtingut = await TascaModel.find({ _id: id })
-        return obtingut.map(x => x.toObject())
+        //return obtingut.map(x => x.toObject())
+        
+        return obtingut.map(x => {
+            const y = x.toObject();
+            delete y['__v'];
+            return y;
+        });
     }
 
     async actualitzar(dades) {
