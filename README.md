@@ -1,50 +1,34 @@
 
-# Node Initial Project
+# Devteams
 
-### Project Structure
+## Descripció
+Es tracta d'una aplicació per a la gestió de tasques en diferents tipus de persistència.
+- Json: arxiu json al sistema de fitxers
+- SQL: base de dades SQLite en memòria
+- MongoDB: base de dades a localhost
 
-Main structure of node.js project. Folders / files:
+## Ús
+Per fer servir els diferent tipus de persitència, es configura a l'arxiu .env o la la linia de comandes.
 
-- <b>\_\_tests__</b>. Tests folder. See [Jest Docs](https://jestjs.io/es-ES/docs/configuration) and [Chai Docs](https://www.chaijs.com/)
-- <b>app</b>:
-    - <b>config</b>
-    - <b>controllers</b>
-    - <b>crons</b>
-    - <b>middleware</b>
-    - <b>models</b>
-    - <b>routes</b>
-    - <b>tmp</b>
-    - <b>app.js</b>. Entry point.
-- <b>.env</b>. Environment descriptor. See [dotenv doc](https://www.npmjs.com/package/dotenv).
-- <b>.eslintrc</b>. Linter JS, static code analyzer. See [EsLint Docs](https://eslint.org/docs/user-guide/configuring/configuration-files).
-- <b>.prettierignore</b>. Code formatter. See [Prettier Config](https://prettier.io/docs/en/configuration.html) and [Prettier Ignore](https://prettier.io/docs/en/ignore.html).
-- <b>.ecosystem.config.js</b>. Process Manage at runtime. See [PM2 Docs](https://pm2.keymetrics.io/).
+- Si es configura a .env, l'execució és:
+`npm start`
+
+- Si es vol forçar alguna variable d'entorn:
+`node DATABASE=JSON app/app.js`
+
+
+## Estructura Projecte
+
+- <b>app/</b>:
+    - <b>controller/</b> - Menú d'opcions de la aplicació
+    - <b>models/</b> - Models diferents per cada tipus de persistència
+    - <b>database/</b> - Persistència mitjançant arxiu json
+    - <b>services/</b> - Lògica de la aplicació independent del model de persistència
+- <b>app.js</b> - Entrada a la aplicació
+- <b>.env</b> - Configuració d'entorn. Veure [dotenv doc](https://www.npmjs.com/package/dotenv).
 - <b>package.json</b>.
 
-### Import project for use with WebStorm
-
-Follow the steps below:
-* Clone the project from the Github Platform. Execute:
-  ```
-  git clone [url project]
-  ```
-* Open the project downloaded.
-![Open Project](img/webstorm_open.png)
-
-
-### Import project for use with Visual Studio Code
-
-Follow the steps below:
-* Clone the project from the Github Platform. Execute:
-  ```
-  git clone [url project]
-  ```
-* Open the project downloaded.
-  ![Open Project](img/VSC_open.png)
-
-
-### Utilities
-
-* [Node Developers Guide](https://nodejs.dev/learn)
-* **.gitignore file** configuration. See [Official Docs](https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files).
-* **Git branches**. See [Official Docs](https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell)
+## Tecnologies externes
+- [Inquirer](https://github.com/SBoudrias/Inquirer.js), per gestionar entrada d'usuari
+- [Sequelize](https://sequelize.org/), per gestionar bsases de dades SQL
+- [Mongoose](https://mongoosejs.com/), per gestionar MongoDB
