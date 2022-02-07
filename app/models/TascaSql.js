@@ -1,5 +1,5 @@
 const { Sequelize, Model, DataTypes } = require('sequelize');
-const sequelize = new Sequelize(process.env.SQLITE_CONN, {logging: false});
+const sequelize = new Sequelize(process.env.SQLITE_CONN, { logging: false });
 
 class Tasca {
 
@@ -72,10 +72,10 @@ const TascaSequelize = sequelize.define('Tasca', {
 (async () => {
   await sequelize.sync();
   await TascaSequelize.bulkCreate([
-    { nom: 'abc123' },
-    { nom: 'prova', estat: 'pendent',descripcio: '',  usuari: 'toni' }
+    { nom: 'rest', estat: 'pendent', descripcio: 'practica rest', hora_inici: '12:00', hora_final: '17:00', usuari: 'toni' },
+    { nom: 'prova', estat: 'començat', descripcio: 'prova', hora_inici: '12:00', hora_final: '13:00', usuari: 'toni' }
   ]);
 })();
 
 
-module.exports = Tasca ;
+module.exports = Tasca;
