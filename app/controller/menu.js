@@ -50,7 +50,8 @@ const selected = async (service,username,opcio) => {
                     type: "list",
                     name: "estat",
                     message: "Quin estat?["+ task.estat +"]",
-                    choices: ["pendent", "començat","finalitzat"]
+                    choices: ["pendent", "començat","finalitzat"],
+                    default:task.estat
                 },
                 {
                     type: "input",
