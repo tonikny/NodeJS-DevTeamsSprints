@@ -6,7 +6,6 @@ class Tasca {
 
   constructor(dades) {
     Object.assign(this, dades);
-    //this.dbo = TascaSequelize.build(dades);
   }
 
   async _llegirArxiu() {
@@ -15,7 +14,11 @@ class Tasca {
       const tasquesJson = JSON.parse(file_data);
       return tasquesJson.tasques;
     } catch (e) {
-      throw e;
+      if (e.code === 'ENOENT') {
+        this._escriureArxiu({ "tasques": [] })
+      } else {
+        throw e;
+      }
     }
   }
 
@@ -80,8 +83,8 @@ class Tasca {
     await this._escriureArxiu(tasquesDespres);
     return true;
   }
-  
+
 }
 
 
-module.exports =  Tasca ;
+module.exports = Tasca;
