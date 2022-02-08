@@ -83,8 +83,13 @@ const selected = async (service, username, opcio) => {
             break;
         case 5:
             answer = await mostraMenu(idTasca);
-            const tasca = await service.veureTasca(parseInt(answer.idTasca));
+            const tasca = await service.veureTasca(answer.idTasca);
+
+            if (tasca) {
             console.table(tasca);
+            } else {
+                console.log('No existeix la tasca.');
+            }
             break;
 
         case 6:
