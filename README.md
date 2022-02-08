@@ -14,7 +14,7 @@ Per fer servir els diferent tipus de persitència, es configura a l'arxiu .env o
 `npm start`
 
 - Si es vol forçar alguna variable d'entorn:
-`node DATABASE=JSON app/app.js`
+`DATABASE=JSON node app/app.js`
 
 
 ## Estructura Projecte
