@@ -66,7 +66,7 @@ const selected = async (service, username, opcio) => {
                     }
                 ]
                 answer = await mostraMenu(editarTasca);
-                service.actualitzarTasca(task._id, username, answer.nom, answer.descripcio, answer.estat, answer.hora_inici, answer.hora_final)
+                service.actualitzarTasca(task.id, username, answer.nom, answer.descripcio, answer.estat, answer.hora_inici, answer.hora_final)
             } else {
                 console.log('No existeix la tasca.');
             }

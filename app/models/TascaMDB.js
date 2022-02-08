@@ -53,7 +53,7 @@ class Tasca {
         const obtingut = await TascaModel.findById(id);
         if (obtingut) {
             const tasca = (({ _id, nom, descripcio, estat, hora_inici, hora_final, usuari }) =>
-                ({ _id, nom, descripcio, estat, hora_inici, hora_final, usuari }))(obtingut);
+                ({ id:_id, nom, descripcio, estat, hora_inici, hora_final, usuari }))(obtingut);
             return tasca;
         } else {
             return undefined;
