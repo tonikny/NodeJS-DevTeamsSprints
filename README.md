@@ -31,4 +31,4 @@ Per fer servir els diferent tipus de persitència, es configura a l'arxiu .env o
 ## Tecnologies externes
 - [Inquirer](https://github.com/SBoudrias/Inquirer.js), per gestionar entrada d'usuari
 - [Sequelize](https://sequelize.org/), per gestionar bsases de dades SQL
-- [Mongoose](https://mongoosejs.com/), per gestionar MongoDB
+- [Mongoose](https://mongoosejs.com/), per gestionar MongoDB.
