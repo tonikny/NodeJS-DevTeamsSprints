@@ -4,7 +4,7 @@
 ## Descripció
 Es tracta d'una aplicació per a la gestió de tasques en diferents tipus de persistència.
 - Json: arxiu json al sistema de fitxers
-- SQL: base de dades SQLite en memòria
+- MySQL: base de dades Mysql
 - MongoDB: base de dades a localhost
 
 ## Ús
@@ -14,7 +14,7 @@ Per fer servir els diferent tipus de persitència, es configura a l'arxiu .env o
 `npm start`
 
 - Si es vol forçar alguna variable d'entorn:
-`DATABASE=JSON node app/app.js`
+`DATABASE=JSON node app/app.js` Les opcions possibles són JSON (per defecte), MYSQL i MONGO.
 
 
 ## Estructura Projecte
@@ -29,6 +29,6 @@ Per fer servir els diferent tipus de persitència, es configura a l'arxiu .env o
 - <b>package.json</b>.
 
 ## Tecnologies externes
-- [Inquirer](https://github.com/SBoudrias/Inquirer.js), per gestionar entrada d'usuari
-- [Sequelize](https://sequelize.org/), per gestionar bsases de dades SQL
+- [Inquirer](https://github.com/SBoudrias/Inquirer.js), per gestionar entrada d'usuari.
+- [Sequelize](https://sequelize.org/) i [Mysql2](https://github.com/sidorares/node-mysql2#readme) per gestionar bases de dades MySQL.
 - [Mongoose](https://mongoosejs.com/), per gestionar MongoDB.
