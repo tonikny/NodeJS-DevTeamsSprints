@@ -3,17 +3,17 @@
 
 ## Descripció
 Es tracta d'una aplicació per a la gestió de tasques en diferents tipus de persistència.
-- Json: arxiu json al sistema de fitxers
-- MySQL: base de dades Mysql
-- MongoDB: base de dades a localhost
+- JSON: arxiu json al sistema de fitxers
+- MYSQL: base de dades Mysql
+- MONGO: base de dades MongoDB
 
 ## Ús
-Per fer servir els diferent tipus de persitència, es configura a l'arxiu .env o la la linia de comandes.
-
-- Si es configura a .env, l'execució és:
+- S'han de configurar els paràmetres de connexió a les bases de dades l'arxiu .env
+- Per fer servir els diferent tipus de persitència, es configura també a l'arxiu .env o es pot forçar des de la linia de comandes.
+- L'execució és:
 `npm start`
 
-- Si es vol forçar alguna variable d'entorn:
+- Si es vol forçar el tipus de base de dades:
 `DATABASE=JSON node app/app.js` Les opcions possibles són JSON (per defecte), MYSQL i MONGO.
 
 
