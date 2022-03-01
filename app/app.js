@@ -7,7 +7,7 @@ switch (process.env.DATABASE) {
   case "MONGO":
     modelType = './models/TascaMDB';
     break;
-  case "SQLITE":
+  case "MYSQL":
     modelType = './models/TascaSql';
     break;
   default:

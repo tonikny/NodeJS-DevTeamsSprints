@@ -1,5 +1,23 @@
+const mysql = require('mysql2/promise');
 const { Sequelize, Model, DataTypes } = require('sequelize');
-const sequelize = new Sequelize(process.env.SQLITE_CONN, { logging: false });
+
+const host = process.env.MYSQL_HOST;
+const port = process.env.MYSQL_PORT;
+const user = process.env.MYSQL_USER;
+const password = process.env.MYSQL_PASS;
+const database = process.env.MYSQL_DB;
+
+(async () => {
+    try {
+      const conn = await mysql.createConnection({ host, port, user, password });
+      await conn.query(`CREATE DATABASE IF NOT EXISTS \`${database}\`;`);
+      await sequelize.sync({ force: false });
+    } catch (e) {
+      console.error('No es pot connectar a la bd', e);
+    }
+  })();
+
+
 
 class Tasca {
 
@@ -39,6 +57,9 @@ class Tasca {
   }
 }
 
+
+const sequelize = new Sequelize(database, user, password, {host, port, dialect:'mysql', logging: false });
+
 const TascaSequelize = sequelize.define('Tasca', {
   id: {
     type: DataTypes.INTEGER,
@@ -47,7 +68,6 @@ const TascaSequelize = sequelize.define('Tasca', {
   },
   nom: {
     type: DataTypes.STRING,
-    //allowNull: false
   },
   estat: {
     type: DataTypes.STRING
@@ -66,16 +86,9 @@ const TascaSequelize = sequelize.define('Tasca', {
   }
 }, {
   createdAt: false,
-  updatedAt: false
+  updatedAt: false,
+  tableName: 'tasques'
 });
-
-(async () => {
-  await sequelize.sync();
-  await TascaSequelize.bulkCreate([
-    { nom: 'rest', estat: 'pendent', descripcio: 'practica rest', hora_inici: '12:00', hora_final: '17:00', usuari: 'toni' },
-    { nom: 'prova', estat: 'començat', descripcio: 'prova', hora_inici: '12:00', hora_final: '13:00', usuari: 'toni' }
-  ]);
-})();
 
 
 module.exports = Tasca;
