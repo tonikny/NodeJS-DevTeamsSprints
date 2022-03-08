@@ -40,12 +40,14 @@ const selected = async (service, username, opcio) => {
                     {
                         type: "input",
                         name: "nom",
-                        message: "Nom de la tasca?[" + task.nom + "]"
+                        message: "Nom de la tasca?[" + task.nom + "]",
+                        validate: input =>  input && /^\s*$/.test(input)? "Escriu el nom de la tasca.":true 
                     },
                     {
                         type: "input",
                         name: "descripcio",
-                        message: "Descripció:[" + task.descripcio + "]"
+                        message: "Descripció:[" + task.descripcio + "]",
+                        validate: input =>  input && /^\s*$/.test(input)? "Escriu text a la descripció.":true 
                     },
                     {
                         type: "list",
@@ -57,12 +59,14 @@ const selected = async (service, username, opcio) => {
                     {
                         type: "input",
                         name: "hora_inici",
-                        message: "A quina hora comença? [" + task.hora_inici + "]"
+                        message: "A quina hora comença? [" + task.hora_inici + "]",
+                        validate: input => input && !/^([01]\d|2[0123])(:[012345]\d)$/.test(input)? "Format incorrecte":true 
                     },
                     {
                         type: "input",
                         name: "hora_final",
-                        message: "A quina hora acaba?[" + task.hora_final + "]"
+                        message: "A quina hora acaba?[" + task.hora_final + "]",
+                        validate: input => input && !/^([01]\d|2[0123])(:[012345]\d)$/.test(input)? "Format incorrecte":true 
                     }
                 ]
                 answer = await mostraMenu(editarTasca);
@@ -86,7 +90,7 @@ const selected = async (service, username, opcio) => {
             const tasca = await service.veureTasca(answer.idTasca);
 
             if (tasca) {
-            console.table(tasca);
+                console.table(tasca);
             } else {
                 console.log('No existeix la tasca.');
             }
@@ -102,12 +106,13 @@ const usernamePreguntes = [
     {
         type: "input",
         name: "name",
-        message: "el teu nom?"
+        message: "el teu nom?",
+        validate: input =>  !input || /^\s*$/.test(input)? "Escriu el username.":true 
+
     }
 
 
 ]
-
 const menuPreguntes = [
     {
         type: "number",
@@ -122,7 +127,8 @@ const idTasca = [
     {
         type: "number",
         name: "idTasca",
-        message: "id de la tasca?"
+        message: "id de la tasca?",
+        validate: input =>   isNaN(input)? "Escriu id  de la tasca.":true 
     }
 ]
 
@@ -130,7 +136,8 @@ const novaTasca = [
     {
         type: "input",
         name: "nom",
-        message: "Nom de la tasca?"
+        message: "Nom de la tasca?",
+        validate: input =>  !input || /^\s*$/.test(input)? "Escriu el nom de la tasca.":true 
     },
     {
         type: "input",
@@ -146,12 +153,14 @@ const novaTasca = [
     {
         type: "input",
         name: "hora_inici",
-        message: "A quina hora comença?"
+        message: "A quina hora comença?[00:00]",
+        validate: input => !/^([01]\d|2[0123])(:[012345]\d)$/.test(input)? "Format incorrecte":true 
     },
     {
         type: "input",
         name: "hora_final",
-        message: "A quina hora acaba?"
+        message: "A quina hora acaba?[00:00]",
+        validate: input => input && !/^([01]\d|2[0123])(:[012345]\d)$/.test(input)? "Format incorrecte":true 
     }
 ]
 module.exports = { start }
